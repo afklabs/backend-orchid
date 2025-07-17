@@ -40,10 +40,13 @@ class RoleListScreen extends Screen
         return 'A comprehensive list of all roles, including their permissions and associated users.';
     }
 
+    /**
+     * The permissions required to access this screen.
+     */
     public function permission(): ?iterable
     {
         return [
-            'platform.systems.roles',
+            'list roles',
         ];
     }
 
@@ -57,7 +60,8 @@ class RoleListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('bs.plus-circle')
-                ->href(route('platform.systems.roles.create')),
+                ->href(route('platform.systems.roles.create'))
+                ->canSee(auth()->user()->can('create roles')),
         ];
     }
 
